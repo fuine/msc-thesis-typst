@@ -2,6 +2,8 @@
 #import "@preview/glossarium:0.5.6": make-glossary, register-glossary, print-glossary, gls, glspl
 #import "@preview/lovelace:0.3.0": *
 #import "@preview/theorion:0.3.3": *
+#import "@preview/subpar:0.2.2"
+
 #import cosmos.rainbow: *
 #let definition = definition.with(fill: blue.darken(10%))
 #let definition-box = definition-box.with(fill: blue.darken(10%))
@@ -113,3 +115,13 @@
 }
 #let larrow = sym.arrow.l
 #let ub(content) = math.upright(math.bold(content))
+
+#let multipage-subfigures(caption: none, label: none, ..figures) = {
+  show figure: set block(breakable: true)
+  subpar.grid(
+    caption: caption,
+    columns: 1,
+    label: label,
+    ..figures.pos().map(fig => figure(image("images/" + fig.first()), caption: fig.last()))
+  )
+}

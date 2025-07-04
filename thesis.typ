@@ -136,7 +136,7 @@
   // --- Main Chapters ---
   include "content/ch1_intro.typ"
   include "content/ch2_methods.typ"
-  // include "content/ch3_implementation.typ"
+  include "content/ch3_results.typ"
   // include "content/ch4_evaluation.typ"
   // include "content/ch5_summary.typ"
 
