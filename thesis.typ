@@ -162,7 +162,7 @@
   table-outline()
 
   // --- Appendices ---
-  // appendix(lang.thesis, include "content/ch6_manual.typ")
+  appendix(lang.thesis, include "content/ch5_appendix.typ")
 
   if draft {
     set heading(numbering: none)

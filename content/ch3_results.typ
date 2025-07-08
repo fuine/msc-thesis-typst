@@ -269,7 +269,7 @@ multiple reasons:
 
 Finally, results of the selected models are visualized in @fig:aspartus_raucs_eers and
 @fig:aspartus_rocs. Exact results of all experiments can be found in the Appendix,
-#todo[Reference this: tab:aspartus_rocs]. Additionally to these models, a Logistic Regression with l2 penalty
+@tab:aspartus_rocs. Additionally to these models, a Logistic Regression with l2 penalty
 classifier is trained on the merged training and validations subsets and evaluated on
 the test subset. It has been selected due to the best performance achieved amongst
 several models in the original study on the given dataset and its results are presented
@@ -579,8 +579,7 @@ terminating training process after the right (highest RAUC yielding) epoch.
 
 
 Results on the test subset can be seen in @fig:titanic_raucs_eers and @fig:titanic_rocs.
-Full results of all experiments can be found in the Appendix, #todo[Reference
-tab:titanic_rocs]. Both
+Full results of all experiments can be found in the Appendix, @tab:titanic_rocs. Both
 DES and CMA-ES yield very similar RAUC results (medians of respectively 0.871 and
 0.872), with the former having slightly greater variation. jSO seems to perform better
 (median of 0.878), with a crucial exception of one outlier run, which scores noticeably
