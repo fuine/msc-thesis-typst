@@ -558,7 +558,7 @@ Two different tools were used to visualize and compare heuristic optimization re
 Empirical Cumulative Distribution Function (ECDF)@6557689 and distribution plots for
 each hyperparameter.
 
-#heading(level: 4, numbering: none)[ECDF]
+==== ECDF
 <sssec:ecdf_description>
 ECDF is a function of the proportion of executed objective function evaluations when the
 algorithm successfully reaches certain step. For all of the experiments described in
@@ -576,7 +576,7 @@ In order to quantify these curves an Area Under the Curve is used, referred to a
 (ECDF AUC). Moreover, to further simplify comparisons I propose Normalized ECDF AUC
 (NEAUC), such that its value is in the range of $[0, 1]$.
 
-#heading(level: 4, numbering: none)[Hyperparameters distribution plots]
+==== Hyperparameters distribution plots
 <hyperparameters-distribution-plots>
 To visualize how heuristics optimize hyperparameters, distribution plots are created for
 each hyperparameter, each illustrating last 5 generations. Kernel Density Estimation
@@ -603,7 +603,7 @@ runs increases, which is the reason why it is not shown for all experiments.
 Classifiers' performance is assessed using selection of tools: ROC
 curves, logarithmic loss, as well as training history plots.
 
-#heading(level: 4, numbering: none)[ROC AUC]
+==== ROC AUC
 <roc-auc>
 To evaluate neural network's performance on a binary dataset (i.e.~one with 2 target
 classes) an Area Under the Curve (AUC) will be measured for the Receiver Operator
@@ -623,7 +623,7 @@ classifier yielding values $0.5$ and $1.0$ respectively.
 In this thesis ROC's AUC will be referred to as RAUC in order to prevent confusion with
 ECDF's AUC (EAUC).
 
-#heading(level: 4, numbering: none)[Log loss]
+==== Log loss
 <log-loss>
 For non-binary datasets, models will be evaluated by the multinomial
 cross-entropy loss (also known as logarithmic loss or log loss in
@@ -635,7 +635,7 @@ $m$, in which 1 denotes the target class, and 0 otherwise), $p_i$ is a
 vector of probabilities for each class for the given sample such that
 $ p_(i j) in (0, 1) : forall i sum_(j = 1)^m p_(i j) = 1 $
 
-#heading(level: 4, numbering: none)[Training history plots]
+==== Training history plots
 <training-history-plots>
 Another way to visualize final results of optimization is the plot of loss function
 throughout classifier's training. In order to do so, each classifier stores a backlog of

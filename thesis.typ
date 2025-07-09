@@ -122,7 +122,10 @@
   // if you want to override any settings from the template here is the place to do so,
   // e.g.:
   // set text(font: "Comic Sans MS")
-  show heading.where(level: 5): set heading(outlined: false, numbering: none)
+  // disable numbering and outlining for the level 4 and 5 headings
+  let heading-selectors = (4, 5).map(x => heading.where(level: x))
+  show selector.or(..heading-selectors): set heading(outlined: false, numbering: none)
+  // booktabs-like table decorations
   set table(
     stroke: (x, y) => (
       top: if y <= 1 { 1pt } else { 0pt },

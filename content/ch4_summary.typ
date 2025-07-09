@@ -42,16 +42,14 @@ for hyperparameter tuning problems, especially on problems with high dimensional
 
 == Future research
 <future-research>
-#heading(level: 4, numbering: none)[Scalability with respect to
-architecture and dataset used]
+==== Scalability with respect to architecture and dataset used
 <scalability-with-respect-to-architecture-and-dataset-used>
 While all tested algorithms managed to find satisfying solutions, datasets and
 classifiers used were fairly minimal. It could be beneficial to run similar experiments
 on bigger datasets and more complex architectures to see how does optimization process
 scale with mentioned factors.
 
-#heading(level: 4, numbering: none)[Scalability with respect to number
-of tuned hyperparameters]
+==== Scalability with respect to number of tuned hyperparameters
 <scalability-with-respect-to-number-of-tuned-hyperparameters>
 In theory, DES should scale better performance-wise with the number of optimized
 hyperparameters. Seeing as deep neural networks have potentially dozens, if not hundreds
@@ -60,8 +58,7 @@ higher number of these hyperparameters. This approach requires a significant
 computational power, but is a way to naturally scale the optimization process
 horizontally with more available hardware.
 
-#heading(level: 4, numbering: none)[Different initialization of
-population strategy]
+==== Different initialization of population strategy
 <different-initialization-of-population-strategy>
 Initialization can often have a significant impact on the quality of the early
 solutions. Combined with the fact that often users have a good guess for decent
@@ -82,7 +79,7 @@ further boost optimization process. Proposed initialization strategies are:
   the initial population, while the rest of the population is sampled in a canonical
   way. This strategy could be easily used in DES and jSO optimizers.
 
-#heading(level: 4, numbering: none)[jSO's parameters tuning]
+==== jSO's parameters tuning
 <jsos-parameters-tuning>
 Usually when a tuning algorithm is used to optimize hyperparameters, user does not tune
 parameters of the optimizer itself. Parameters for jSO have not been tuned as a part of
@@ -91,15 +88,14 @@ overall better results. By researching the impact of jSO's parameters on its per
 in the hyperparameter optimization setting, an optimal set of parameters could be found,
 for which satisfying results are reached on variety of datasets and architectures.
 
-#heading(level: 4, numbering: none)[Improved objective function]
+==== Improved objective function
 <improved-objective-function>
 Objective function could be more sophisticated, i.e. taking under consideration the
 slice of training history, rather than looking at the last training epoch. This could
 lead to smoother learning curve of classifiers and could help with robustness of the
 found individuals.
 
-#heading(level: 4, numbering: none)[Difference between jSO
-implementations]
+==== Difference between jSO implementations
 <difference-between-jso-implementations>
 Re-implementation of the jSO algorithm written in the Python language for this thesis
 has in general been performing better, than the original implementation. The source of

@@ -54,7 +54,7 @@ Detailed hypotheses are described below.
 Autonomous hyperparameter tuning has been explored for at least 20 years, with several
 different approaches being developed.
 
-#heading(level: 4, numbering: none)[Grid search]
+==== Grid search
 <grid-search>
 Grid search is one of the simplest techniques used for hyperparameter tuning. After user
 provides sets of values for each hyperparameter, all possible combinations are tested.
@@ -62,7 +62,7 @@ This approach does not scale well and it requires user to pick specific values f
 hyperparameter. Moreover, if user provides value that results in bad performance, all
 combinations using it will be tested, even if all such combinations are infeasible.
 
-#heading(level: 4, numbering: none)[Random search]
+==== Random search
 <random-search>
 A slightly different technique, called random search, can be used to achieve much better
 results. With this approach, user can either provide the set of values, or a
@@ -75,7 +75,7 @@ reaches set budget. In the end, the best found individual is chosen. While simpl
 method shows surprisingly good performance, as described
 in~@Bergstra:2012:RSH:2188385.2188395.
 
-#heading(level: 4, numbering: none)[Bayesian optimization]
+==== Bayesian optimization
 <bayesian-optimization>
 This approach uses Bayesian method based on Gaussian processes to tune hyperparameters.
 The basic idea behind this technique is to use all available information from previous
@@ -87,7 +87,7 @@ Examples of this approach are TPE~@NIPS2011_4443,
 SMAC~#cite(label("10.1007/978-3-642-25566-3_40"));, or the works by Snoek et
 al.~@pmlr-v37-snoek15@NIPS2012_4522.
 
-#heading(level: 4, numbering: none)[Evolutionary optimization]
+==== Evolutionary optimization
 <evolutionary-optimization>
 Solution based on evolutionary optimizations often combine hyperparameter tuning with
 structure evolution. This approach is called neuroevolution, and has been studied quite
