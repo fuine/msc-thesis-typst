@@ -1,4 +1,4 @@
-#import "../utils.typ": todo, ub, table-with-notes, algorithm, comment, flex-caption
+#import "../utils.typ": ub, table-with-notes, algorithm, comment, flex-caption
 
 = Methods, datasets and tools
 <ch::methods>

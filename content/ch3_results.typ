@@ -1,5 +1,4 @@
-#import "../utils.typ": todo, silentheading, flex-caption, table-with-notes, multipage-subfigures
-#import "@preview/subpar:0.2.2"
+#import "../utils.typ": flex-caption, table-with-notes, multipage-subfigures
 #import "@preview/zero:0.4.0"
 
 = Results and conclusions

@@ -1,4 +1,4 @@
-#import "../utils.typ": todo, silentheading, flex-caption, table-with-notes, multipage-subfigures
+#import "../utils.typ": table-with-notes
 
 = Tables
 
