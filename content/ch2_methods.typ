@@ -1,4 +1,4 @@
-#import "../utils.typ": todo, ub, table-with-notes
+#import "../utils.typ": todo, ub, table-with-notes, algorithm, larrow, comment
 
 = Methods, datasets and tools
 <ch::methods>
@@ -45,7 +45,28 @@ constants used throughout optimization process:
 These constants are calculated during initialization of the algorithm, using formulas
 described in the original paper~@Hansen:2001:CDS:1108839.1108843.
 
-#figure(todo[CMAES algo])<alg:cmaes>
+#algorithm(caption: [Covariance Matrix Adaptation Evolution Strategy])[
+- *Require:* $ub(m)^1$ initial solution
+- *Require:* $sigma^1$ initial step size multiplier
++ $ub(p)^1 <- 0$
++ $ub(s)^1 <- 0$
++ $ub(C)^1 <- ub(I)$ #comment[Covariance matrix]
++ $t <- 1$
++ *while* !stop *do*
+  + *for* $i <- 1$ *to* $lambda$ *do*
+    + $ub(d)^t_i ~ N(0, ub(C)^t)$
+    + $ub(x)^t_i <- ub(m)^t + sigma^t ub(d)^t_i$
+  + #smallcaps[evaluate]$(X^t)$
+  + sort $X^t$ according to their fitness
+  + $ub(m)^(t+1) <- ub(m)^t + sigma^t angle.l D^t_mu angle.r$
+  + $ub(s)^(t+1) <- (1 - c_s) ub(s)^t + sqrt(mu c_s (2 - c_s)) dot.op (ub(C)^t)^(-1/2) angle.l D_mu^t angle.r$
+  + $ub(p)^(t+1) <- (1 - c_p) ub(p)^t + sqrt(mu c_p (2 - c_p)) dot.op angle.l D_mu^t angle.r$
+  + $ub(C)^t_1 <- (ub(p)^t)(ub(p)^t)^T$ #comment[rank-1 update]
+  + $ub(C)^t_mu <- 1/mu  sum^mu_(i=1) (ub(d)^t_i)(ub(d)^t_i)^T$ #comment[rank-$mu$ update]
+  + $ub(C)^(t+1) <- (1 - c_1 - c_mu) ub(C)^t + c_1 ub(C)_1^t + c_mu ub(C)_mu^t$ #comment[update covariance matrix]
+  + $sigma^(t+1) <- sigma^t exp(c_s/d_sigma ((norm(ub(s)^(t + 1)))/(E norm(N(0, ub(I)))) - 1))$ #comment[update step size]
+  + $t <- t + 1$
+]<alg:cmaes>
 
 === DES
 <des>
@@ -56,20 +77,19 @@ individuals resembling these of CMA-ES. DES strives to achieve much better perfo
 on problems with high dimensionality, as it avoids exponential complexity of specific
 matrix calculations, which CMA-ES incurs. Additionally DES can be a parameter-free
 method according to its authors, which is a desired feature from this research point of
-view. Outline of the Differential Evolution Strategy is provided
-in~@alg:des. As opposed to CMA-ES, DES does not have a notion of
-step size. Optimization starts with initialization of the first population $X^1$, using
-a uniform distribution over restricted range for each optimized component between set
-boundaries. Next, main loop of the algorithm is entered, which starts with the
-evaluation of the population $X^t$ and its midpoint $angle.l X^t angle.r$. Following the
-evaluation, a difference vector $delta^t$ is created by calculating the difference
-between the midpoint of the whole population $angle.l X^t angle.r$ and the midpoint of
-the best $mu$ points $angle.l X_mu^t angle.r$. This vector is then saved in the
-$ub(p)^t$ vector. Adaptation of the population is achieved through the
-repeated mutation of the elite's midpoint $X_mu^t$. First random values $h_1$ and $h_2$
-are sampled uniformly over the set ${ 1, dots.h, H }$, with $H$ being a
-user-selected constant. The mutation vector $ub(d)^(t + 1)$ consists of four
-different components:
+view. Outline of the Differential Evolution Strategy is provided in~@alg:des. As opposed
+to CMA-ES, DES does not have a notion of step size. Optimization starts with
+initialization of the first population $X^1$, using a uniform distribution over
+restricted range for each optimized component between set boundaries. Next, main loop of
+the algorithm is entered, which starts with the evaluation of the population $X^t$ and
+its midpoint $angle.l X^t angle.r$. Following the evaluation, a difference vector
+$delta^t$ is created by calculating the difference between the midpoint of the whole
+population $angle.l X^t angle.r$ and the midpoint of the best $mu$ points $angle.l
+X_mu^t angle.r$. This vector is then saved in the $ub(p)^t$ vector. Adaptation of the
+population is achieved through the repeated mutation of the elite's midpoint $X_mu^t$.
+First random values $h_1$ and $h_2$ are sampled uniformly over the set ${ 1, dots.h, H
+}$, with $H$ being a user-selected constant. The mutation vector $ub(d)^(t + 1)$
+consists of four different components:
 
 - the difference between two randomly selected individuals from the historical
   population $X^(t - h_1)$;
@@ -81,7 +101,27 @@ DES has 4 constants: $epsilon$, $c_c$, $c_p$ and $H$, which are calculated durin
 initialization phase, according to the formulas provided by authors in their original
 work~@7969529.
 
-#figure(todo[DES algo])<alg:des>
+#[
+  #set par(leading: 0.3em) // change line spacing for the sublines of line 11
+  #algorithm(caption: [Differential Evolution Strategy])[
+  + $t <- 1$
+  + $ub(p)^1 <- 0$
+  + #smallcaps[initialize]$(X^1)$ #comment[Initialize first population]
+  + *while* !stop *do*
+    + #smallcaps[evaluate]$(X^t, angle.l X^t angle.r)$
+    + $delta^t <- angle.l X^t_mu angle.r - angle.l X^t angle.r$
+    + $ub(p)^t <- (1 - c_p) ub(p)^(t-1) + sqrt(mu c_p (2 - c_p)) delta^t$
+    + *for* $k <- 1$ *to* $lambda$ *do*
+      + pick at random $h_1, h_2 in {1, ..., H}$
+      + $j, k ~ cal(U)(1, ..., mu)$
+      + $ub(d)^(t+1)_i <- & sqrt(c_c / 2) (ub(x)^(t-h_1)_j - ub(x)^(t-h_1)_k) \
+                          & + sqrt(c_c) delta^(t-h_1) dot.op N(0, 1) \
+                          & + sqrt(1 - c_c) ub(p)^(t-h_2) dot.op N(0, 1) \
+                          & + epsilon dot.op N(ub(0), ub(I))$
+      + $ub(x)^(t+1)_i <- angle.l X^t_mu angle.r + ub(d)^(t+1)_i$
+    + $t <- t + 1$
+  ]<alg:des>
+]
 
 === jSO
 <jso>
@@ -128,7 +168,7 @@ $
     ub(v)_(i, j)^t\, & quad "if" r a n d (0\, 1) <= C R " or " j = j_(r a n d),
     ub(x)_(i, j)^t\, & quad "otherwise"
   )
-$
+$<eq:crossover>
 where $C R in [0, 1]$ is a crossover parameter and $j_(r a n d) in {1, ..., N}$ is a
 randomly chosen index, which guarantees that at least one component is taken from the
 mutated version of the individual.
@@ -153,7 +193,48 @@ jSO is characterized by its distinctive self-adaptation techniques for $C R$ and
 control parameters, which are described in lines 9-22, as well as shrinking of its
 population size.
 
-#figure(todo[jSO algo])<alg:jso>
+#algorithm(caption: [jSO algorithm])[
+- *Require:* $d_sigma$ damping for step size
+- *Require:* $p_(i n i t)$ initial $p$ rate
++ $t <- 1, p <- p_(i n i t)$
++ $ub(A) <- emptyset$ #comment[archive]
++ $M^i_F <- 0.5, thin i in {1, ..., H}$ #comment[initialize scaling factor memory]
++ $M^i_(C R) <- 0.8, thin i in {1, ..., H}$ #comment[initialize crossover control parameter memory]
++ *while* !stop *do*
+  + $S_(C R) <- emptyset$
+  + $S_F <- emptyset$
+  + *for* $i <- 1$ *to* $lambda$ *do*
+    + pick at random $r in {1, ..., H}$
+    + *if* $r = H$ *then*
+      + $M^r_F <- 0.9$
+      + $M^r_(C R) <- 0.9$
+    + *if* $M^r_(C R) < 0$ *then*
+      + $C R^t_i <- 0$
+    + *else*
+      + $C R^t_i ~ cal(N)_i (M^r_(C R), 0.1)$
+    + *if* $t < 0.25T_(M A X)$ *then*
+      + $C R^t_i <- max(C R^t_i, 0.7)$
+    + *else if* $t < 0.5T_(M A X)$ *then*
+      + $C R^t_i <- max(C R^t_i, 0.6)$
+    + $F^t_i ~ cal(C) (M^r_F, 0.1)$
+    + *if* $t < 0.6T_(M A X)$ *and* $F^t_i > 0.7$ *then*
+      + $F^t_i <- 0.7$
+    + $ub(u)^t_i <-$ #smallcaps[current-to-pBest-w/1/bin] #comment[mutation and crossover, using @eq:mutation_strategy and @eq:crossover]
+  + *for* $i <- 1$ *to* $lambda$ *do*
+    + *if* $f(ub(u)^t_i) <= f(ub(x)^t_i)$ *then* #comment[selection, using @eq:selection]
+      + $ub(x)^(t+1)_i <- ub(u)^t_i$
+    + *else*
+      + $ub(x)^(t+1)_i <- ub(x)^t_i$
+    + *if* $f(ub(u)^t_i) < f(ub(x)^t_i)$ *then*
+      + $ub(x)^t_i -> ub(A)$
+      + $C R^t_i -> S_(C R)$
+      + $F^t_i -> S_F$
+    + Shrink $ub(A)$ if necessary
+    + Update $M_(C R)$ and $M_F$
+    + Apply Linear Population Size Reduction, as described in @6900380
+    + $p <- p_(i n i t) (1 - (n f e s) / (2 m a x\_ n f e s))$ #comment[update $p$]
+    + $t <- t + 1$
+]<alg:jso>
 
 === Default parameters
 <ssec:default_heuristic_parameters>
