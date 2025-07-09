@@ -24,7 +24,7 @@
     variable to false.
 
   **/
-  let draft = true
+  let draft = false
   let in-print = false
   set-margin-note-defaults(hidden: not draft)
 
@@ -55,8 +55,8 @@
     // Note that irregardless of the language of your thesis you need to fill in all the
     // fields below - both *-en and *-pl
     title: (
-      en: "Heuristic hyperparameter optimization for neural networks",
-      pl: "Heurystyczne strojenie hiperparametrów sieci neuronowych",
+      en: [Heuristic hyperparameter optimization\ for neural networks],
+      pl: [Heurystyczne strojenie hiperparametrów\ sieci neuronowych],
     ),
     abstract: (
       en: [
