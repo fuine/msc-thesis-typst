@@ -1,2 +1,4 @@
 *.pdf
 thesis.pdf
+justfile
+benchmark.md
