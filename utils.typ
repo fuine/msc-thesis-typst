@@ -15,24 +15,6 @@
   }
 }
 
-/// Create the outline of figures with localized title
-#let figure-outline() = {
-  context {
-    let lang = text.lang
-    let figures-text = if lang == "en" { "List of Figures" } else { "Spis rysunków" }
-    outline(title: figures-text, target: figure.where(kind: image))
-  }
-}
-
-/// Create the outline of tables with localized title
-#let table-outline() = {
-  context {
-    let lang = text.lang
-    let tables-text = if lang == "en" { "List of Tables" } else { "Spis tabel" }
-    outline(title: tables-text, target: figure.where(kind: table))
-  }
-}
-
 /// Create a TODO bubble with the note being outlined in the TODO outline
 #let todo(it) = [
   #let caution-rect = rect.with(inset: 1em, radius: 0.5em)

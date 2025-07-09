@@ -42,16 +42,18 @@
     in-print: in-print,
     lang: lang,
     // Adjust the following fields accordingly to your thesis
-    thesis-type: "master", // or "master"
-    program: "Informatyka", // or ""
-    specialisation: "Inżynieria Systemów Informatycznych",
-    institute: "Informatyki",
-    supervisor: "dr hab. inż. Robert M. Nowak",
-    advisor: none, // or `none` if there were no advisors
-    faculty: "eiti", // or "meil"
+    titlepage-info: (
+      thesis-type: "master", // or "master"
+      program: "Informatyka", // or ""
+      specialisation: "Inżynieria Systemów Informatycznych",
+      institute: "Instytut Informatyki",
+      supervisor: "dr hab. inż. Robert M. Nowak",
+      advisor: none, // or `none` if there were no advisors
+      faculty: "weiti", // or "meil"
+      index-number: "261479",
+      date: datetime(year: 2018, month: 5, day: 31),
+    ),
     author: "Łukasz Neumann",
-    index-number: "261479",
-    date: datetime(year: 2018, month: 5, day: 31),
     // Note that irregardless of the language of your thesis you need to fill in all the
     // fields below - both *-en and *-pl
     title: (
