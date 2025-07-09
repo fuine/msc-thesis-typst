@@ -29,8 +29,8 @@ these methods on a selection of various, real-life datasets.
 <main-hypothesis>
 
 #block(spacing: 2em)[
-*Can Differential Evolution Strategy and jSO algorithms perform on par with Covariance
-Matrix Adaptation Evaluation Strategy when tuning neural network's hyperparameters?*
+  *Can Differential Evolution Strategy and jSO algorithms perform on par with Covariance
+  Matrix Adaptation Evaluation Strategy when tuning neural network's hyperparameters?*
 ]
 
 Detailed hypotheses are described below.

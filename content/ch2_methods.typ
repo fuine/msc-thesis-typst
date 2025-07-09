@@ -1,4 +1,4 @@
-#import "../utils.typ": ub, table-with-notes, algorithm, comment, flex-caption
+#import "../utils.typ": algorithm, comment, flex-caption, table-with-notes, ub
 
 = Methods, datasets and tools
 <ch::methods>
@@ -46,26 +46,26 @@ These constants are calculated during initialization of the algorithm, using for
 described in the original paper~@Hansen:2001:CDS:1108839.1108843.
 
 #algorithm(caption: [Covariance Matrix Adaptation Evolution Strategy])[
-- *Require:* $ub(m)^1$ initial solution
-- *Require:* $sigma^1$ initial step size multiplier
-+ $ub(p)^1 <- 0$
-+ $ub(s)^1 <- 0$
-+ $ub(C)^1 <- ub(I)$ #comment[Covariance matrix]
-+ $t <- 1$
-+ *while* !stop *do*
-  + *for* $i <- 1$ *to* $lambda$ *do*
-    + $ub(d)^t_i ~ N(0, ub(C)^t)$
-    + $ub(x)^t_i <- ub(m)^t + sigma^t ub(d)^t_i$
-  + #smallcaps[evaluate]$(X^t)$
-  + sort $X^t$ according to their fitness
-  + $ub(m)^(t+1) <- ub(m)^t + sigma^t angle.l D^t_mu angle.r$
-  + $ub(s)^(t+1) <- (1 - c_s) ub(s)^t + sqrt(mu c_s (2 - c_s)) dot.op (ub(C)^t)^(-1/2) angle.l D_mu^t angle.r$
-  + $ub(p)^(t+1) <- (1 - c_p) ub(p)^t + sqrt(mu c_p (2 - c_p)) dot.op angle.l D_mu^t angle.r$
-  + $ub(C)^t_1 <- (ub(p)^t)(ub(p)^t)^T$ #comment[rank-1 update]
-  + $ub(C)^t_mu <- 1/mu  sum^mu_(i=1) (ub(d)^t_i)(ub(d)^t_i)^T$ #comment[rank-$mu$ update]
-  + $ub(C)^(t+1) <- (1 - c_1 - c_mu) ub(C)^t + c_1 ub(C)_1^t + c_mu ub(C)_mu^t$ #comment[update covariance matrix]
-  + $sigma^(t+1) <- sigma^t exp(c_s/d_sigma ((norm(ub(s)^(t + 1)))/(E norm(N(0, ub(I)))) - 1))$ #comment[update step size]
-  + $t <- t + 1$
+  - *Require:* $ub(m)^1$ initial solution
+  - *Require:* $sigma^1$ initial step size multiplier
+  + $ub(p)^1 <- 0$
+  + $ub(s)^1 <- 0$
+  + $ub(C)^1 <- ub(I)$ #comment[Covariance matrix]
+  + $t <- 1$
+  + *while* !stop *do*
+    + *for* $i <- 1$ *to* $lambda$ *do*
+      + $ub(d)^t_i ~ N(0, ub(C)^t)$
+      + $ub(x)^t_i <- ub(m)^t + sigma^t ub(d)^t_i$
+    + #smallcaps[evaluate]$(X^t)$
+    + sort $X^t$ according to their fitness
+    + $ub(m)^(t+1) <- ub(m)^t + sigma^t angle.l D^t_mu angle.r$
+    + $ub(s)^(t+1) <- (1 - c_s) ub(s)^t + sqrt(mu c_s (2 - c_s)) dot.op (ub(C)^t)^(-1/2) angle.l D_mu^t angle.r$
+    + $ub(p)^(t+1) <- (1 - c_p) ub(p)^t + sqrt(mu c_p (2 - c_p)) dot.op angle.l D_mu^t angle.r$
+    + $ub(C)^t_1 <- (ub(p)^t)(ub(p)^t)^T$ #comment[rank-1 update]
+    + $ub(C)^t_mu <- 1/mu sum^mu_(i=1) (ub(d)^t_i)(ub(d)^t_i)^T$ #comment[rank-$mu$ update]
+    + $ub(C)^(t+1) <- (1 - c_1 - c_mu) ub(C)^t + c_1 ub(C)_1^t + c_mu ub(C)_mu^t$ #comment[update covariance matrix]
+    + $sigma^(t+1) <- sigma^t exp(c_s/d_sigma ((norm(ub(s)^(t + 1)))/(E norm(N(0, ub(I)))) - 1))$ #comment[update step size]
+    + $t <- t + 1$
 ]<alg:cmaes>
 
 === DES
@@ -104,22 +104,22 @@ work~@7969529.
 #[
   #set par(leading: 0.3em) // change line spacing for the sublines of line 11
   #algorithm(caption: [Differential Evolution Strategy])[
-  + $t <- 1$
-  + $ub(p)^1 <- 0$
-  + #smallcaps[initialize]$(X^1)$ #comment[Initialize first population]
-  + *while* !stop *do*
-    + #smallcaps[evaluate]$(X^t, angle.l X^t angle.r)$
-    + $delta^t <- angle.l X^t_mu angle.r - angle.l X^t angle.r$
-    + $ub(p)^t <- (1 - c_p) ub(p)^(t-1) + sqrt(mu c_p (2 - c_p)) delta^t$
-    + *for* $k <- 1$ *to* $lambda$ *do*
-      + pick at random $h_1, h_2 in {1, ..., H}$
-      + $j, k ~ cal(U)(1, ..., mu)$
-      + $ub(d)^(t+1)_i <- & sqrt(c_c / 2) (ub(x)^(t-h_1)_j - ub(x)^(t-h_1)_k) \
-                          & + sqrt(c_c) delta^(t-h_1) dot.op N(0, 1) \
-                          & + sqrt(1 - c_c) ub(p)^(t-h_2) dot.op N(0, 1) \
-                          & + epsilon dot.op N(ub(0), ub(I))$
-      + $ub(x)^(t+1)_i <- angle.l X^t_mu angle.r + ub(d)^(t+1)_i$
-    + $t <- t + 1$
+    + $t <- 1$
+    + $ub(p)^1 <- 0$
+    + #smallcaps[initialize]$(X^1)$ #comment[Initialize first population]
+    + *while* !stop *do*
+      + #smallcaps[evaluate]$(X^t, angle.l X^t angle.r)$
+      + $delta^t <- angle.l X^t_mu angle.r - angle.l X^t angle.r$
+      + $ub(p)^t <- (1 - c_p) ub(p)^(t-1) + sqrt(mu c_p (2 - c_p)) delta^t$
+      + *for* $k <- 1$ *to* $lambda$ *do*
+        + pick at random $h_1, h_2 in {1, ..., H}$
+        + $j, k ~ cal(U)(1, ..., mu)$
+        + $ub(d)^(t+1)_i <- & sqrt(c_c / 2) (ub(x)^(t-h_1)_j - ub(x)^(t-h_1)_k) \
+          & + sqrt(c_c) delta^(t-h_1) dot.op N(0, 1) \
+          & + sqrt(1 - c_c) ub(p)^(t-h_2) dot.op N(0, 1) \
+          & + epsilon dot.op N(ub(0), ub(I))$
+        + $ub(x)^(t+1)_i <- angle.l X^t_mu angle.r + ub(d)^(t+1)_i$
+      + $t <- t + 1$
   ]<alg:des>
 ]
 
@@ -194,46 +194,46 @@ control parameters, which are described in lines 9-22, as well as shrinking of i
 population size.
 
 #algorithm(caption: [jSO algorithm])[
-- *Require:* $d_sigma$ damping for step size
-- *Require:* $p_(i n i t)$ initial $p$ rate
-+ $t <- 1, p <- p_(i n i t)$
-+ $ub(A) <- emptyset$ #comment[archive]
-+ $M^i_F <- 0.5, thin i in {1, ..., H}$ #comment[initialize scaling factor memory]
-+ $M^i_(C R) <- 0.8, thin i in {1, ..., H}$ #comment[initialize crossover control parameter memory]
-+ *while* !stop *do*
-  + $S_(C R) <- emptyset$
-  + $S_F <- emptyset$
-  + *for* $i <- 1$ *to* $lambda$ *do*
-    + pick at random $r in {1, ..., H}$
-    + *if* $r = H$ *then*
-      + $M^r_F <- 0.9$
-      + $M^r_(C R) <- 0.9$
-    + *if* $M^r_(C R) < 0$ *then*
-      + $C R^t_i <- 0$
-    + *else*
-      + $C R^t_i ~ cal(N)_i (M^r_(C R), 0.1)$
-    + *if* $t < 0.25T_(M A X)$ *then*
-      + $C R^t_i <- max(C R^t_i, 0.7)$
-    + *else if* $t < 0.5T_(M A X)$ *then*
-      + $C R^t_i <- max(C R^t_i, 0.6)$
-    + $F^t_i ~ cal(C) (M^r_F, 0.1)$
-    + *if* $t < 0.6T_(M A X)$ *and* $F^t_i > 0.7$ *then*
-      + $F^t_i <- 0.7$
-    + $ub(u)^t_i <-$ #smallcaps[current-to-pBest-w/1/bin] #comment[mutation and crossover, using @eq:mutation_strategy and @eq:crossover]
-  + *for* $i <- 1$ *to* $lambda$ *do*
-    + *if* $f(ub(u)^t_i) <= f(ub(x)^t_i)$ *then* #comment[selection, using @eq:selection]
-      + $ub(x)^(t+1)_i <- ub(u)^t_i$
-    + *else*
-      + $ub(x)^(t+1)_i <- ub(x)^t_i$
-    + *if* $f(ub(u)^t_i) < f(ub(x)^t_i)$ *then*
-      + $ub(x)^t_i -> ub(A)$
-      + $C R^t_i -> S_(C R)$
-      + $F^t_i -> S_F$
-    + Shrink $ub(A)$ if necessary
-    + Update $M_(C R)$ and $M_F$
-    + Apply Linear Population Size Reduction, as described in @6900380
-    + $p <- p_(i n i t) (1 - (n f e s) / (2 m a x\_ n f e s))$ #comment[update $p$]
-    + $t <- t + 1$
+  - *Require:* $d_sigma$ damping for step size
+  - *Require:* $p_(i n i t)$ initial $p$ rate
+  + $t <- 1, p <- p_(i n i t)$
+  + $ub(A) <- emptyset$ #comment[archive]
+  + $M^i_F <- 0.5, thin i in {1, ..., H}$ #comment[initialize scaling factor memory]
+  + $M^i_(C R) <- 0.8, thin i in {1, ..., H}$ #comment[initialize crossover control parameter memory]
+  + *while* !stop *do*
+    + $S_(C R) <- emptyset$
+    + $S_F <- emptyset$
+    + *for* $i <- 1$ *to* $lambda$ *do*
+      + pick at random $r in {1, ..., H}$
+      + *if* $r = H$ *then*
+        + $M^r_F <- 0.9$
+        + $M^r_(C R) <- 0.9$
+      + *if* $M^r_(C R) < 0$ *then*
+        + $C R^t_i <- 0$
+      + *else*
+        + $C R^t_i ~ cal(N)_i (M^r_(C R), 0.1)$
+      + *if* $t < 0.25T_(M A X)$ *then*
+        + $C R^t_i <- max(C R^t_i, 0.7)$
+      + *else if* $t < 0.5T_(M A X)$ *then*
+        + $C R^t_i <- max(C R^t_i, 0.6)$
+      + $F^t_i ~ cal(C) (M^r_F, 0.1)$
+      + *if* $t < 0.6T_(M A X)$ *and* $F^t_i > 0.7$ *then*
+        + $F^t_i <- 0.7$
+      + $ub(u)^t_i <-$ #smallcaps[current-to-pBest-w/1/bin] #comment[mutation and crossover, using @eq:mutation_strategy and @eq:crossover]
+    + *for* $i <- 1$ *to* $lambda$ *do*
+      + *if* $f(ub(u)^t_i) <= f(ub(x)^t_i)$ *then* #comment[selection, using @eq:selection]
+        + $ub(x)^(t+1)_i <- ub(u)^t_i$
+      + *else*
+        + $ub(x)^(t+1)_i <- ub(x)^t_i$
+      + *if* $f(ub(u)^t_i) < f(ub(x)^t_i)$ *then*
+        + $ub(x)^t_i -> ub(A)$
+        + $C R^t_i -> S_(C R)$
+        + $F^t_i -> S_F$
+      + Shrink $ub(A)$ if necessary
+      + Update $M_(C R)$ and $M_F$
+      + Apply Linear Population Size Reduction, as described in @6900380
+      + $p <- p_(i n i t) (1 - (n f e s) / (2 m a x\_ n f e s))$ #comment[update $p$]
+      + $t <- t + 1$
 ]<alg:jso>
 
 === Default parameters
@@ -246,6 +246,7 @@ values ranges. Non-lamarckian approach is assumed, with the harshest possible pe
 for boundary crossing, effectively killing individuals, which leave provided boundaries.
 
 #figure(
+  // @typstyle off
   table-with-notes(
     columns: 3,
     align: center + horizon,
@@ -290,10 +291,8 @@ characteristics motivated the choice of datasets for the thesis.
     table(
       columns: 3,
       align: center,
-      table.header(
-        [Class], [number of records], [% in the dataset],
-      ),
-      ..args
+      table.header([Class], [number of records], [% in the dataset]),
+      ..args,
     ),
     caption: [Proportions of the target class in the #dataset-name dataset.],
   )
@@ -313,6 +312,7 @@ Supplied dataset contains 12072 examples. Target class has 2 different values:
 
 Class proportions are presented in @tab:aspartus_classes_ratio.
 
+// @typstyle off
 #dataset-class-table(
   dataset-name: [Aspartus],
   [CASH], [1227], [10.16],
@@ -344,6 +344,7 @@ dataset, with mild target class imbalance. This dataset has been shared
 by the Vanderbilt University's Department of
 Biostatistics~@titanic_dataset.
 
+// @typstyle off
 #dataset-class-table(
   dataset-name: [Titanic],
   [SURVIVED], [500], [38.20],
@@ -369,6 +370,7 @@ Classifier's goal is to label given image, deciding if the sample is a ship or a
 iceberg. Target class proportions are described in~@tab:icebergs_classes_ratio. Based on
 this dataset, convolutional neural network classifier is optimized, as described in @ssec:cnn.
 
+// @typstyle off
 #dataset-class-table(
   dataset-name: [Icebergs],
   [ICEBERG], [753], [46.95],
@@ -396,6 +398,7 @@ number generator) using Glorot's uniform initialization rule~@Glorot10understand
 
 #let hyperparams-table(caption: none, ..args) = {
   figure(
+    // @typstyle off
     table-with-notes(
       columns: 4,
       align: center + horizon,
@@ -441,6 +444,7 @@ training process.
 All tuned hyperparameters for the Multilayer Perceptron classifier are described
 in @tab:mlp_hyperparameters.
 
+// @typstyle off
 #hyperparams-table(
   caption: [Hyperparameters tuned for the MLP architecture.],
   [Hidden layer size], [1], [1001], [$x * 10^3 + 1$],
@@ -465,6 +469,7 @@ layers and both weight and activity L2 regularization~@Ng:2004:FSL:1015330.10154
 used. Hyperparameters tuned for this architecture are depicted
 in~@tab:cnn_hyperparameters.
 
+// @typstyle off
 #hyperparams-table(
   caption: [Hyperparameters tuned for the MLP architecture.],
   [`dropout_2` value], [0.0], [0.9], [$x * 0.9$],
@@ -474,14 +479,12 @@ in~@tab:cnn_hyperparameters.
   [Learning rate], [$10^(-5)$], [$10^(-1)$], [$10^(-1 - 4*x)$],
 )<tab:cnn_hyperparameters>
 
-#figure(image("../images/iceberg_architecture.svg", width: 67.0%),
-  caption: flex-caption(
-    [Convolutional Neural Network architecture used in the study. Numbers correspond to
+#figure(image("../images/iceberg_architecture.svg", width: 67.0%), caption: flex-caption(
+  [Convolutional Neural Network architecture used in the study. Numbers correspond to
     the input and output dimensions of data tensor, with _None_ being the placeholder
     for the number of samples.],
-    [Convolutional Neural Network architecture used in the study.]
-  )
-)<fig:cnn_architecture>
+  [Convolutional Neural Network architecture used in the study.],
+))<fig:cnn_architecture>
 
 == Default experiment description
 <default-experiment-description>
@@ -490,44 +493,47 @@ below.
 
 #{
   set enum(numbering: "1.a)")
-[
-  + Initialize chosen heuristic algorithm. Its parameters are described
-    in~@ssec:default_heuristic_parameters, or in the experiment description, if default
-    parameters have not been used.
+  [
+    + Initialize chosen heuristic algorithm. Its parameters are described
+      in~@ssec:default_heuristic_parameters, or in the experiment description, if
+      default parameters have not been used.
 
-  + Create specific subsets, based on the dataset used in the experiment, in the following
-    manner:
+    + Create specific subsets, based on the dataset used in the experiment, in the
+      following manner:
 
-    + Split dataset into two parts using 80:20 proportions. Use stratification, as it
-      preserves target class' proportions in all subsets. The smaller subset (i.e. 20% of
-      the dataset) will be further referred to as _test_ subset.
+      + Split dataset into two parts using 80:20 proportions. Use stratification, as it
+        preserves target class' proportions in all subsets. The smaller subset (i.e. 20%
+        of the dataset) will be further referred to as _test_ subset.
 
-    + Split the remaining 80% of the dataset using the same proportions (80:20) and
-      stratification. The bigger of two subsets created that way will be referred to as
-      _training_ subset, while the smaller one as _validation_ subset.
+      + Split the remaining 80% of the dataset using the same proportions (80:20) and
+        stratification. The bigger of two subsets created that way will be referred to
+        as _training_ subset, while the smaller one as _validation_ subset.
 
-  + Define objective function as follows:
+    + Define objective function as follows:
 
-    + Given an individual from heuristic optimizer, transform it to obtain proper
-      hyperparameters' values. Transformations are described separately for each
-      classifier, and can be found in~@tab:mlp_hyperparameters and @tab:cnn_hyperparameters.
+      + Given an individual from heuristic optimizer, transform it to obtain proper
+        hyperparameters' values. Transformations are described separately for each
+        classifier, and can be found in~@tab:mlp_hyperparameters and
+        @tab:cnn_hyperparameters.
 
-    + Create a classifier using provided hyperparameters.
+      + Create a classifier using provided hyperparameters.
 
-    + Train the classifier on the training subset of the dataset.
+      + Train the classifier on the training subset of the dataset.
 
-    + Evaluate trained classifier on the validation subset.
+      + Evaluate trained classifier on the validation subset.
 
-  + Run heuristic optimization process until it runs out of budget (function evaluations).
+    + Run heuristic optimization process until it runs out of budget (function
+      evaluations).
 
-  + Select the best individual from the history of the optimization.
+    + Select the best individual from the history of the optimization.
 
-  + Create a classifier using selected individual.
+    + Create a classifier using selected individual.
 
-  + Train created classifier using combined train and validation subsets.
+    + Train created classifier using combined train and validation subsets.
 
-  + Evaluate trained model on the test subset.
-]}
+    + Evaluate trained model on the test subset.
+  ]
+}
 
 Each classifier starts with the fixed, known state of the pseudo-random number
 generator, so that results are repeatable and starting weights are identical for all
@@ -697,7 +703,7 @@ benchmark function a two-sample Wilcoxon rank-sum test~#cite(label("10.2307/3001
 is calculated, using two vectors (one from each implementation) as input samples. These
 p-values can then be aggregated by the means of a meta-analysis technique called
 Fisher's method~#cite(label("10.2307/2681650"));@fishers_elston. It can be divided into
-two phases. First, a $X^2$ test statistic is calculated: 
+two phases. First, a $X^2$ test statistic is calculated:
 $ X_(2 k)^2 ~ - 2 sum_(i = 1)^k ln(p_i) $
 where $p_i$ is the p-value for the $i$th test and $k$ is the number of tests. Next,
 assuming that all tests have been independent (as is the case in the described
@@ -710,9 +716,11 @@ directionality under account. This is achieved using the following
 formula:
 
 $
-p_"one-sided" = cases(delim: "{",
+  p_"one-sided" = cases(
+    delim: "{",
     p / 2\, & quad "if" Z > 0,
-    1 - p / 2\, & quad "otherwise")
+    1 - p / 2\, & quad "otherwise"
+  )
 $
 
 where $p$ is the two-tailed p-value and $Z$ is Wilcoxon rank-sum test's statistic.
@@ -769,7 +777,7 @@ in~@tab:hal_hardware.
     table.cell(colspan: 2, [GPU]), [NVIDIA Tesla K20m],
     table.hline(start: 2, stroke: 0.3pt),
     table.cell(colspan: 2, [Memory]), [252 GB],
-    table.hline()
+    table.hline(),
   ),
   caption: [Software and hardware used as a platform for experiments in the thesis.],
 )<tab:hal_hardware>

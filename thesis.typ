@@ -1,5 +1,7 @@
 #{
-  import "@local/wut-thesis:0.1.0": wut-thesis, acknowledgements, figure-outline, table-outline, appendix
+  import "@local/wut-thesis:0.1.0": (
+    acknowledgements, appendix, figure-outline, table-outline, wut-thesis,
+  )
   import "utils.typ": flex-caption-styles, glossary-outline
   import "glossary.typ": glossary
   import "@preview/glossarium:0.5.6": make-glossary, register-glossary
@@ -32,7 +34,7 @@
     studies: "pl",
     // language in which your thesis is written, influences the rest of the text (i.e.
     // abstracts order, captions/references supplements, hyphenation etc)
-    thesis: "en"
+    thesis: "en",
   )
 
   show: wut-thesis.with(
@@ -49,7 +51,7 @@
     faculty: "eiti", // or "meil"
     author: "Łukasz Neumann",
     index-number: "261479",
-    date: datetime(year: 2018, month: 5, day: 31), // not today: datetime(year: 1969, month: 9, day: 6,)
+    date: datetime(year: 2018, month: 5, day: 31),
     // Note that irregardless of the language of your thesis you need to fill in all the
     // fields below - both *-en and *-pl
     title: (
@@ -113,9 +115,21 @@
       ],
     ),
     keywords: (
-      en: ("evolutionary algorithm", "optimization", "tuning", "hyperparameter", "neural network"),
-      pl: ("algorytm ewolucyjny", "optymalizacja", "strojenie", "hiperparametr", "sieć neuronowa"),
-    )
+      en: (
+        "evolutionary algorithm",
+        "optimization",
+        "tuning",
+        "hyperparameter",
+        "neural network",
+      ),
+      pl: (
+        "algorytm ewolucyjny",
+        "optymalizacja",
+        "strojenie",
+        "hiperparametr",
+        "sieć neuronowa",
+      ),
+    ),
   )
 
   // --- Custom Settings ---
