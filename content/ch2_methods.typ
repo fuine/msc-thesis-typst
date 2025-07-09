@@ -1,4 +1,4 @@
-#import "../utils.typ": todo, ub, table-with-notes, algorithm, larrow, comment
+#import "../utils.typ": todo, ub, table-with-notes, algorithm, comment, flex-caption
 
 = Methods, datasets and tools
 <ch::methods>
@@ -475,13 +475,13 @@ in~@tab:cnn_hyperparameters.
 )<tab:cnn_hyperparameters>
 
 #figure(image("../images/iceberg_architecture.svg", width: 67.0%),
-  caption: [
-    Convolutional Neural Network architecture used in the study. Numbers correspond to
+  caption: flex-caption(
+    [Convolutional Neural Network architecture used in the study. Numbers correspond to
     the input and output dimensions of data tensor, with _None_ being the placeholder
-    for the number of samples.
-  ]
-)
-<fig:cnn_architecture>
+    for the number of samples.],
+    [Convolutional Neural Network architecture used in the study.]
+  )
+)<fig:cnn_architecture>
 
 == Default experiment description
 <default-experiment-description>

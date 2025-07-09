@@ -1,12 +1,10 @@
 #{
   import "@local/wut-thesis:0.1.0": wut-thesis, acknowledgements, figure-outline, table-outline, appendix
-  import "utils.typ": flex-caption, flex-caption-styles, todo, glossary-outline, show-theorion, show-property
+  import "utils.typ": flex-caption-styles, glossary-outline
   import "glossary.typ": glossary
   import "@preview/glossarium:0.5.6": make-glossary, register-glossary, print-glossary, gls, glspl
   import "@preview/drafting:0.2.2": note-outline, set-margin-note-defaults
 
-  show: show-theorion
-  show: show-property
   show: make-glossary
   register-glossary(glossary)
   show: flex-caption-styles

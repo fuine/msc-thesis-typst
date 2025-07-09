@@ -84,13 +84,14 @@ thesis are defined as low-dimensional due to the hardware and time limitations.
 ]
 
 #figure(image("../images/ecdfs.svg"),
-  caption: [
-    ECDF curves for various implementations of selected heuristic
-    algorithms on specific CEC'2017 functions. Re-implementations in
-    Python language have suffix 'py'.
-  ]
-)
-<fig:impl_verification>
+  caption: flex-caption(
+    [ECDF curves for various implementations of selected heuristic algorithms on specific
+    CEC'2017 functions. Re-implementations in Python language have suffix 'py'.
+  ],
+  [ECDF curves for various implementations of selected heuristic algorithms on specific
+  CEC'2017 functions.]
+  )
+) <fig:impl_verification>
 
 == Results for Aspartus dataset
 <results-for-aspartus-dataset>
@@ -116,7 +117,10 @@ parameters set for this algorithm -- default values are used.
       ),
       ..args
     ),
-    caption: [ECDF AUC values resulting from optimization on the #dataset dataset. Each curve has been created based on ten independent runs of the experiment.],
+    caption: flex-caption(
+      [ECDF AUC values resulting from optimization on the #dataset dataset. Each curve has been created based on ten independent runs of the experiment.],
+      [ECDF AUC values resulting from optimization on the #dataset dataset.],
+    ),
   )
 }
 
@@ -128,9 +132,7 @@ parameters set for this algorithm -- default values are used.
 )<tab:aspartus_ecdfs>
 
 #figure(image("../images/aspartus_3_runs/ecdfs.svg"),
-  caption: [
-    ECDF curves resulting from optimization on the Aspartus dataset.
-  ]
+  caption: [ECDF curves resulting from optimization on the Aspartus dataset.]
 )
 <fig:aspartus_ecdfs>
 
@@ -162,11 +164,14 @@ process.
   ("aspartus_3_runs/des_distributions.svg", [DES]),
   ("aspartus_3_runs/cmaes_distributions.svg", [CMA-ES]),
   ("aspartus_3_runs/jso_distributions.svg", [jSO]),
-  caption: [
-    Hyperparameters' distribution estimation resulting from optimization on the Aspartus
+  caption: flex-caption(
+    [Hyperparameters' distribution estimation resulting from optimization on the Aspartus
     dataset. Plots created based on the last 5 generations. Numbers in the legend
     correspond to the number of the experiment run.
   ],
+  [Hyperparameters' distribution estimation resulting from optimization on the Aspartus
+    dataset.]
+  ),
   label: <fig:aspartus_distributions>
 )
 
@@ -183,11 +188,14 @@ the progress slows down.
   ("aspartus_3_runs/des_best.svg", [DES]),
   ("aspartus_3_runs/cmaes_best.svg", [CMA-ES]),
   ("aspartus_3_runs/jso_best.svg", [jSO]),
-  caption: [
-    Best fitness in population (dashed lines) and 'running' best fitness (solid lines)
+  caption: flex-caption(
+    [Best fitness in population (dashed lines) and 'running' best fitness (solid lines)
     found during optimization on the Aspartus dataset. Color associated with the number
     of the run is depicted in legends.
   ],
+  [Best fitness in population and 'running' best fitness found during optimization on
+  the Aspartus dataset.]
+  ),
   label: <fig:aspartus_3_runs_best>
 )
 
@@ -214,11 +222,14 @@ made based on these backlog plots, as listed below.
 #multipage-subfigures(
   ("aspartus_3_runs/mean_loss.svg", [Mean]),
   ("aspartus_3_runs/best_loss.svg", [Best]),
-  caption: [
-    Loss histories for selected individuals found during optimization on the Aspartus
+  caption: flex-caption(
+    [Loss histories for selected individuals found during optimization on the Aspartus
     dataset. Dotted vertical lines in the means plot denote early training termination
     of a classifier.
   ],
+  [Loss histories for selected individuals found during optimization on the Aspartus
+  dataset.]
+  ),
   label: <fig:aspartus_3_runs_losses>
 )
 
@@ -245,11 +256,14 @@ multiple reasons:
 #multipage-subfigures(
   ("aspartus_3_runs/mean_rauc.svg", [Mean]),
   ("aspartus_3_runs/best_rauc.svg", [Best]),
-  caption: [
-    RAUC histories for selected individuals resulting from optimization on the Aspartus
+  caption: flex-caption(
+    [RAUC histories for selected individuals resulting from optimization on the Aspartus
     dataset. Dotted vertical lines in the means plot denote early training termination
     of a classifier.
   ],
+  [RAUC histories for selected individuals resulting from optimization on the Aspartus
+    dataset.]
+  ),
   label: <fig:aspartus_raucs>
 )
 
@@ -273,19 +287,25 @@ individuals.
 #multipage-subfigures(
   ("aspartus_3_runs/rocs_values.svg", [ROC AUC]),
   ("aspartus_3_runs/eers_values.svg", [Equal Error Rate]),
-  caption: [
-    Box plots of RAUC and EER values for each run of the experiment on the Aspartus
+  caption: flex-caption(
+    [Box plots of RAUC and EER values for each run of the experiment on the Aspartus
     dataset. Each dot denotes a single experiment run. Purple, dashed line marks result
     yielded by the reference classifier.
   ],
+  [Box plots of RAUC and EER values for each run of the experiment on the Aspartus
+  dataset.]
+  ),
   label: <fig:aspartus_raucs_eers>
 )
 
 #figure(image("../images/aspartus_3_runs/rocs.svg"),
-  caption: [
-    Mean ROC curves for the best solutions found during optimization on the Aspartus
+  caption: flex-caption(
+    [Mean ROC curves for the best solutions found during optimization on the Aspartus
     dataset. Curve for Logistic Regression model is provided as a reference.
-  ]
+  ],
+  [Mean ROC curves for the best solutions found during optimization on the Aspartus
+  dataset.]
+  )
 )<fig:aspartus_rocs>
 
 == Results for the Icebergs dataset
@@ -316,9 +336,7 @@ evaluations. However, further progress is much slower.
 )<tab:icebergs_ecdfs>
 
 #figure(image("../images/icebergs/ecdfs.svg"),
-  caption: [
-    ECDF curves resulting from optimization on the Icebergs dataset.
-  ]
+  caption: [ECDF curves resulting from optimization on the Icebergs dataset.]
 )<fig:icebergs_ecdfs>
 
 
@@ -343,10 +361,12 @@ do not have significant overfit problems, especially since multiple dropout laye
 introduced.
 
 #figure(image("../images/icebergs/distributions.svg"),
-  caption: [
-    ECDF AUC values resulting from optimization on the Icebergs dataset. Each curve has
+  caption: flex-caption(
+    [ECDF AUC values resulting from optimization on the Icebergs dataset. Each curve has
     been created based on ten independent runs of the experiment.
-  ]
+  ],
+  [ECDF AUC values resulting from optimization on the Icebergs dataset.]
+  )
 )<fig:icebergs_distributions>
 
 Plots of the 'running' best and best-in-generation individuals are depicted in
@@ -369,8 +389,7 @@ has a fairly constant standard deviation. Its mean, however, can worsen from tim
 time, and does so for several generations.
 
 #figure(image("../images/icebergs/best.svg"),
-  caption: [
-    Best fitness in population and 'running' best fitness found during optimization on
+  caption: [Best fitness in population and 'running' best fitness found during optimization on
     the Icebergs dataset.
   ]
 )<fig:icebergs_best>
@@ -379,8 +398,7 @@ time, and does so for several generations.
 #multipage-subfigures(
   ("icebergs/means.svg", [Limited for CMA-ES]),
   ("icebergs/means_limited.svg", [Limited for DES and jSO]),
-  caption: [
-    Mean fitness in generation and standard deviation resulting from optimization on the
+  caption: [Mean fitness in generation and standard deviation resulting from optimization on the
     Icebergs dataset.
   ],
   label: <fig:icebergs_means>
@@ -397,8 +415,7 @@ increase could lead to faster convergence, but could also cause problems with st
 which might be an explanation for the chosen values.
 
 #figure(image("../images/icebergs/loss.svg"),
-  caption: [
-    Loss histories for selected individuals found during optimization on the Icebergs
+  caption: [Loss histories for selected individuals found during optimization on the Icebergs
     dataset.
   ]
 ) <fig:icebergs_losses>
@@ -483,11 +500,14 @@ process.
   ("titanic/des_distributions.svg", [DES]),
   ("titanic/cmaes_distributions.svg", [CMA-ES]),
   ("titanic/jso_distributions.svg", [jSO]),
-  caption: [
-    Hyperparameters' distribution estimation resulting from optimization on the Titanic
+  caption: flex-caption(
+    [Hyperparameters' distribution estimation resulting from optimization on the Titanic
     dataset. Plots for the first and last five generations. Numbers in the legend
     correspond to the number of the experiment run.
   ],
+  [Hyperparameters' distribution estimation resulting from optimization on the Titanic
+  dataset.]
+  ),
   label: <fig:titanic_distributions>
 )
 
@@ -514,11 +534,14 @@ parameters on the given problem, jSO prefers exploration over exploitation.
   ("titanic/des_best.svg", [DES]),
   ("titanic/cmaes_best.svg", [CMA-ES]),
   ("titanic/jso_best.svg", [jSO]),
-  caption: [
-    Best fitness in population (dashed lines) and 'running' best fitness
+  caption: flex-caption(
+    [Best fitness in population (dashed lines) and 'running' best fitness
     (solid lines) found during optimization on the Titanic dataset.
     Color associated with the number of the run is depicted in legends.
   ],
+  [Best fitness in population and 'running' best fitness found during optimization on
+  the Titanic dataset.]
+  ),
   label: <fig:titanic_best>
 )
 
@@ -535,11 +558,14 @@ validation set over the span of 20 epochs.
 #multipage-subfigures(
   ("titanic/mean_loss.svg", [Mean]),
   ("titanic/best_loss.svg", [Best]),
-  caption: [
-    Loss histories for selected individuals found during optimization on the Titanic
+  caption: flex-caption(
+    [Loss histories for selected individuals found during optimization on the Titanic
     dataset. Dotted vertical lines in the means plot denote early training termination
     of a classifier.
   ],
+  [Loss histories for selected individuals found during optimization on the Titanic
+  dataset.]
+  ),
   label: <fig:titanic_losses>
 )
 
@@ -555,11 +581,14 @@ terminating training process after the right (highest RAUC yielding) epoch.
 #multipage-subfigures(
   ("titanic/mean_rauc.svg", [Mean]),
   ("titanic/best_rauc.svg", [Best]),
-  caption: [
-    RAUC histories for selected individuals resulting from optimization
-    on the Titanic dataset. Dotted vertical lines in the means plot
-    denote early training termination of a classifier.
+  caption: flex-caption(
+    [RAUC histories for selected individuals resulting from optimization on the Titanic
+    dataset. Dotted vertical lines in the means plot denote early training termination
+    of a classifier.
   ],
+  [RAUC histories for selected individuals resulting from optimization on the Titanic
+  dataset.]
+  ),
   label: <fig:titanic_raucs>
 )
 
@@ -574,18 +603,24 @@ directions, and for all optimizers. CMA-ES and jSO have identical medians (0.182
 while the median for DES is slightly worse -- 0.185.
 
 #figure(image("../images/titanic/rocs.svg"),
-  caption: [
-    Mean ROC curves for the best solutions found during optimization on the Titanic
+  caption: flex-caption(
+    [Mean ROC curves for the best solutions found during optimization on the Titanic
     dataset. Curve for Logistic Regression model is provided as a reference.
-  ]
+  ],
+  [Mean ROC curves for the best solutions found during optimization on the Titanic
+  dataset.],
+  )
 )<fig:titanic_rocs>
 
 #multipage-subfigures(
   ("titanic/rocs_values.svg", [ROC AUC]),
   ("titanic/eers_values.svg", [Equal Error Rate]),
-  caption: [
-    Box plots of RAUC and EER values for each run of the experiment on
+  caption: flex-caption(
+    [Box plots of RAUC and EER values for each run of the experiment on
     the Titanic dataset. Each dot denotes a single run of the experiment
   ],
+  [Box plots of RAUC and EER values for each run of the experiment on
+  the Titanic dataset.]
+  ),
   label: <fig:titanic_raucs_eers>
 )
