@@ -1,5 +1,5 @@
 #{
-  import "@preview/wut-thesis:0.1.0": (
+  import "@preview/wut-thesis:0.1.1": (
     acknowledgements, appendix, figure-outline, table-outline, wut-thesis,
   )
   import "utils.typ": flex-caption-styles, glossary-outline

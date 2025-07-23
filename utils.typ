@@ -10,7 +10,6 @@
       "Wykaz symboli i skrótów"
     }
     heading(numbering: none, glossary-text)
-    show figure: it => [#v(-1em) #it #v(-1em)]
     print-glossary(glossary, show-all: true, disable-back-references: true)
   }
 }
@@ -77,6 +76,7 @@
 /// Breakable subfigures based on the `subpar` package
 #let multipage-subfigures(caption: none, label: none, ..figures) = {
   show figure: set block(breakable: true)
+  set figure(gap: 1.5em)
   subpar.grid(caption: caption, columns: 1, label: label, ..figures
     .pos()
     .map(fig => figure(image("images/" + fig.first()), caption: fig.last())))
